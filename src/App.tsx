@@ -38,6 +38,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <AuthenticationBar></AuthenticationBar>
       <Voting></Voting>
+      <Settings></Settings>
     </ThemeProvider>
   );
 }
