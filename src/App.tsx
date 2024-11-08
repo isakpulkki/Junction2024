@@ -1,4 +1,5 @@
-import AuthenticationBar from './components/AuthenticationBar'
+import AuthenticationBar from './components/AuthenticationBar';
+import Voting from './components/Voting';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
@@ -15,28 +16,30 @@ declare module '@mui/material/styles' {
 }
 
 const theme = createTheme({
-  
   colorSchemes: {
-    dark: {palette: {
-      primary: {main: '#f5f5f5'},
-    }},
-}, typography: {
-  fontFamily: 'monospace',
-  button: {
-    textTransform: "none",
+    dark: {
+      palette: {
+        primary: { main: '#f5f5f5' },
+      },
+    },
+  },
+  typography: {
     fontFamily: 'monospace',
-    letterSpacing: '.1rem'
-  }
-} 
+    button: {
+      textTransform: 'none',
+      fontFamily: 'monospace',
+      letterSpacing: '.1rem',
+    },
+  },
 });
 
 function App() {
-
   return (
-     <ThemeProvider theme={theme}>
-    <AuthenticationBar></AuthenticationBar>
-      </ThemeProvider>
-  )
+    <ThemeProvider theme={theme}>
+      <AuthenticationBar></AuthenticationBar>
+      <Voting></Voting>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
