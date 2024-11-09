@@ -57,7 +57,7 @@ app.post("/api/summarize", async (req, res) => {
     // Send the structured JSON response back to the client
     res.json(completion.choices[0].message.content);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: (error as any).message });
   }
 });
 

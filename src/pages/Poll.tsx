@@ -78,24 +78,20 @@ export default function Poll() {
   const handleGenerate = async () => {
     try {
       const response = await fetch("http://localhost:3001/api/summarize", {
-        // Updated endpoint
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          prompt: poll.description || "Provide a description to generate.",
-        }),
+        headers: { "Content-Type": "application/json" },
       });
 
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Server response error:", errorText); // Log response error
         throw new Error("Failed to fetch from the server");
       }
 
       const data = await response.json();
-      setGeneratedResponse(data.summary || "No summary found.");
+      setGeneratedResponse(data.response || "No response generated.");
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error in handleGenerate:", error); // Log detailed error
       setGeneratedResponse("An error occurred while generating the response.");
     }
   };
