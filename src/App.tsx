@@ -21,12 +21,12 @@ export const theme = createTheme({
   colorSchemes: {
     dark: {
       palette: {
-        primary: { main: '#ffffff' },
+        primary: { main: '#f5f5f5' },
       },
     },
   },
   typography: {
-    fontFamily: 'monospace',
+    fontFamily: 'sans-serif',
     button: {
       textTransform: 'none',
       fontFamily: 'monospace',
