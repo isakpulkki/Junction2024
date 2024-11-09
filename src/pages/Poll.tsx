@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import AuthenticationBar from '../components/AuthenticationBar';
 import {
   ThemeProvider,
@@ -25,20 +26,29 @@ export default function Poll() {
   const navigate = useNavigate();
   const { poll } = state || {};
 
-  const [votes, setVotes] = useState<{ positive: number; negative: number }>({
-    positive: poll?.positiveVotes || 0,
-    negative: poll?.negativeVotes || 0,
-  });
+  const [votes, setVotes] = useState({ positive: poll?.positiveVotes || 0, negative: poll?.negativeVotes || 0 });
   const [selectedVote, setSelectedVote] = useState<VoteType | null>(null);
+  const [scrapedContent, setScrapedContent] = useState('');
+
+  useEffect(() => {
+    const fetchScrapedContent = async () => {
+      if (!poll.link) return;
+      try {
+        const response = await axios.get(`http://localhost:5000/scrape?url=${poll.link}`);
+        setScrapedContent(response.data.content);
+        console.log(scrapedContent);
+      } catch (error) {
+        console.error('Error fetching scraped data:', error);
+      }
+    };
+
+    fetchScrapedContent();
+  }, [poll.link]);
 
   const handleVote = (type: VoteType) => {
     setVotes((prev) => {
-      const updatedVotes = {
-        ...prev,
-        [type]: prev[type] + (selectedVote === type ? -1 : 1),
-      };
-      if (selectedVote && selectedVote !== type)
-        updatedVotes[selectedVote] -= 1;
+      const updatedVotes = { ...prev, [type]: prev[type] + (selectedVote === type ? -1 : 1) };
+      if (selectedVote && selectedVote !== type) updatedVotes[selectedVote] -= 1;
       setSelectedVote(selectedVote === type ? null : type);
       return updatedVotes;
     });
@@ -69,8 +79,8 @@ export default function Poll() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div style={{marginBottom: '10px'}}>
-      <AuthenticationBar />
+      <div style={{ marginBottom: '10px' }}>
+        <AuthenticationBar />
       </div>
       <Container>
         <Box
@@ -153,38 +163,31 @@ export default function Poll() {
                   display: 'flex',
                   alignItems: 'center',
                   padding: 1,
-                  backgroundColor:
-                    selectedVote === type
-                      ? type === 'positive'
-                        ? 'lightgreen'
-                        : 'lightcoral'
-                      : 'transparent',
+                  backgroundColor: selectedVote === type ? (type === 'positive' ? 'lightgreen' : 'lightcoral') : 'transparent',
                   '&:hover': {
-                    backgroundColor:
-                      selectedVote === type
-                        ? type === 'positive'
-                          ? 'green'
-                          : 'red'
-                        : 'lightgray',
+                    backgroundColor: selectedVote === type ? (type === 'positive' ? 'green' : 'red') : 'lightgray',
                   },
                 }}
               >
-                {type === 'positive' ? (
-                  <ThumbUpIcon sx={{ color: 'green' }} />
-                ) : (
-                  <ThumbDownIcon color="error" />
-                )}
+                {type === 'positive' ? <ThumbUpIcon sx={{ color: 'green' }} /> : <ThumbDownIcon color="error" />}
                 <Typography variant="body1" sx={{ marginLeft: '4px' }}>
                   {votes[type as VoteType]}
                 </Typography>
               </Button>
             ))}
           </Stack>
-          <Button
-            variant="outlined"
-            sx={{ marginTop: 3 }}
-            onClick={handleGoBack}
-          >
+
+          {/* Scrapettu data täs */}
+          <Box mt={4} width="100%">
+            <Typography variant="h6" gutterBottom>
+              Scraped Content:
+            </Typography>
+            <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', textAlign: 'left' }}>
+              {scrapedContent}
+            </Typography>
+          </Box>
+
+          <Button variant="outlined" sx={{ marginTop: 3 }} onClick={handleGoBack}>
             Go Back
           </Button>
         </Box>
