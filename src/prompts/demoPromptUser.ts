@@ -1,0 +1,3 @@
+export const demoPromptUser = ` Tuonnista verovelvollinen lehden vastaanottaja voi antaa tulli-ilmoituksen 
+Tullille tämän pykälän mukaisesti, jos kyse on arvonlisäverolain 85 a §:n 1 momentin 7 
+kohdassa tarkoitettujen fyysisellä alustalla olevien sanoma- ja aikakauslehtien maahantuonnista Yhteisön alueelta Ahvenanmaan maakuntaan tai Ahvenanmaan maakunnasta muualle Suomeen ja jos lehdet on hankittu ja toimitettu etämyyntinä. Tämän pykälän mukaisesti ilmoitetuista maahantuonneista suoritettava vero on maksettava Tullin ilmoituksen johdosta tekemän verotuspäätöksen perusteella tullilain (304/2016) 64 §:n mukaisesti. `;

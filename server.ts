@@ -2,9 +2,10 @@
 import express from "express";
 import dotenv from "dotenv";
 import OpenAI from "openai";
+import { demoPromptUser } from "./src/prompts/demoPromptUser";
+import { demoPromptSystem } from "./src/prompts/demoPromptSystem";
 
 dotenv.config();
-
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -15,38 +16,45 @@ const openai = new OpenAI({
 
 app.use(express.json());
 
-// Define the system prompt in a separate file or as a constant
-const systemPrompt = "You extract email addresses into JSON data.";
-
-// Route to handle OpenAI chat completion request
-app.post("/api/extract-email", async (req, res) => {
+app.post("/api/summarize", async (req, res) => {
   try {
     // Call OpenAI API for chat completion with structured JSON schema response
     const completion = await openai.chat.completions.create({
       model: "gpt-4-2024-08-06",
       messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: req.body.prompt || "No prompt provided." },
+        { role: "system", content: demoPromptSystem },
+        { role: "user", content: req.body.prompt || demoPromptUser }, // Use demoPromptUser if no prompt is provided
       ],
       response_format: {
         type: "json_schema",
         json_schema: {
-          name: "email_schema",
+          name: "summary_keypoints_schema",
           schema: {
             type: "object",
             properties: {
-              email: {
-                description: "The email address that appears in the input",
+              summary: {
+                description: "A brief summary of the input text",
                 type: "string",
               },
+              key_points: {
+                description:
+                  "An array containing exactly 3 key points from the input",
+                type: "array",
+                items: {
+                  type: "string",
+                },
+                minItems: 3,
+                maxItems: 3,
+              },
             },
+            required: ["summary", "key_points"],
             additionalProperties: false,
           },
         },
       },
     });
 
-  
+    // Send the structured JSON response back to the client
     res.json(completion.choices[0].message.content);
   } catch (error) {
     res.status(500).json({ error: error.message });
