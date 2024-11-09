@@ -69,7 +69,9 @@ export default function Poll() {
 
   return (
     <ThemeProvider theme={theme}>
+      <div style={{marginBottom: '10px'}}>
       <AuthenticationBar />
+      </div>
       <Container>
         <Box
           sx={{
@@ -78,6 +80,7 @@ export default function Poll() {
             alignItems: 'center',
             justifyContent: 'center',
             minHeight: '80vh',
+            padding: 4,
             textAlign: 'center',
           }}
         >
@@ -88,7 +91,7 @@ export default function Poll() {
             {poll.description}
           </Typography>
           
-          {/* Single Accordion with all information */}
+          {/* Dropdown Accordion */}
           <Box mt={3} width="100%">
             <Accordion sx={{backgroundColor: "#333333"}}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -97,7 +100,7 @@ export default function Poll() {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                {/* Summary Section */}
+                {/* Summary */}
                 <Typography variant="subtitle1" fontWeight="bold" color="white" mb={1}>
                   Summary:
                 </Typography>
@@ -164,7 +167,7 @@ export default function Poll() {
                 ) : (
                   <ThumbDownIcon color="error" />
                 )}
-                <Typography variant="body1">
+                <Typography variant="body1" sx={{ marginLeft: '4px' }}>
                   {votes[type as VoteType]}
                 </Typography>
               </Button>

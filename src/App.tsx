@@ -21,7 +21,7 @@ export const theme = createTheme({
   colorSchemes: {
     dark: {
       palette: {
-        primary: { main: '#f5f5f5' },
+        primary: { main: '#ffffff' },
       },
     },
   },
