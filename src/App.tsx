@@ -2,6 +2,7 @@ import AuthenticationBar from './components/AuthenticationBar';
 import Voting from './components/Voting';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 
 declare module '@mui/material/styles' {
   interface Theme {
