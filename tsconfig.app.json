@@ -1,26 +1,29 @@
 {
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
 
-    /* Bundler mode */
-    "moduleResolution": "Bundler",
-    "allowImportingTsExtensions": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-    "jsx": "react-jsx",
+    /* Target and Compatibility */
+    "target": "ES2020",                             // Targeting ES2020
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],       // Use modern ES, DOM libraries, and DOM iteration
+    "module": "ESNext",                             // Use ESNext for module syntax
+    "skipLibCheck": true,                           // Skip type checking for faster builds
+
+    /* Bundler Mode */
+    "moduleResolution": "Bundler",                  // Use Bundler module resolution
+    "allowImportingTsExtensions": true,             // Allow .ts file extension in imports
+    "isolatedModules": true,                        // Treat each file as an isolated module
+    "moduleDetection": "force",                     // Force module detection with explicit imports/exports
+    "noEmit": true,                                 // Do not emit output as bundling is handled separately
+
+    /* JSX and React */
+    "jsx": "react-jsx",                             // Enable new JSX transform for React (React 17+)
+    "useDefineForClassFields": true,                // Align with JavaScript behavior for class fields
 
     /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "strict": true,                                 // Enable all strict type checks
+    "noUnusedLocals": true,                         // Report unused local variables
+    "noUnusedParameters": true,                     // Report unused parameters
+    "noFallthroughCasesInSwitch": true,             // Prevent fallthrough cases in switch statements
   },
-  "include": ["src"]
+  "include": ["src"],                               // Include all source files in the `src` directory
+  "exclude": ["node_modules"]                       // Exclude `node_modules` to avoid conflicts
 }

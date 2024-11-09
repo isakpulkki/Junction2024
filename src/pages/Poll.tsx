@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import AuthenticationBar from '../components/AuthenticationBar';
+import { useState } from "react";
+import AuthenticationBar from "../components/AuthenticationBar";
 import {
   ThemeProvider,
   Box,
@@ -8,13 +8,13 @@ import {
   Stack,
   Button,
   Paper,
-} from '@mui/material';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import { theme } from '../App';
-import { useLocation, useNavigate } from 'react-router-dom';
+} from "@mui/material";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import { theme } from "../App";
+import { useLocation, useNavigate } from "react-router-dom";
 
-type VoteType = 'positive' | 'negative';
+type VoteType = "positive" | "negative";
 
 export default function Poll() {
   const { state } = useLocation();
@@ -41,8 +41,19 @@ export default function Poll() {
   };
 
   const DataItem = ({ label, value }: { label: string; value: string }) => (
-    <Box display="flex" alignItems="center" gap={2} mb={1} justifyContent="space-between" width="100%">
-      <Typography variant="body2" color="black" sx={{ minWidth: '100px', textAlign: 'left' }}>
+    <Box
+      display="flex"
+      alignItems="center"
+      gap={2}
+      mb={1}
+      justifyContent="space-between"
+      width="100%"
+    >
+      <Typography
+        variant="body2"
+        color="black"
+        sx={{ minWidth: "100px", textAlign: "left" }}
+      >
         {label}
       </Typography>
       <Paper
@@ -50,8 +61,8 @@ export default function Poll() {
           backgroundColor: theme.palette.info.light,
           p: 0.7,
           borderRadius: 1,
-          width: '30%',
-          minWidth: '30px'
+          width: "30%",
+          minWidth: "30px",
         }}
       >
         <Typography variant="body2" color="white">
@@ -60,106 +71,175 @@ export default function Poll() {
       </Paper>
     </Box>
   );
-
+  const [generatedResponse, setGeneratedResponse] = useState<string | null>(
+    null
+  );
   const handleGoBack = () => navigate(-1);
+  const handleGenerate = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/summarize", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Server response error:", errorText); // Log response error
+        throw new Error("Failed to fetch from the server");
+      }
+
+      const data = await response.json();
+      setGeneratedResponse(data.response || "No response generated.");
+    } catch (error) {
+      console.error("Error in handleGenerate:", error); // Log detailed error
+      setGeneratedResponse("An error occurred while generating the response.");
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      <div style={{marginBottom: '10px'}}>
+      <div style={{ marginBottom: "10px" }}>
         <AuthenticationBar />
       </div>
       <Container>
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '80vh',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "80vh",
             padding: 4,
-            textAlign: 'center',
+            textAlign: "center",
             my: 2,
           }}
         >
-          <Typography variant="h4" fontWeight='600' gutterBottom sx={{ mb: 3}}>
+          <Typography variant="h4" fontWeight="600" gutterBottom sx={{ mb: 3 }}>
             {poll.title}
           </Typography>
-          <Paper sx={{width: '100%', p: 1.5, boxShadow: 5, borderRadius: '8px'}}>
-          <Typography variant="body1" fontWeight='500' gutterBottom>
-            {poll.description}
-          </Typography>
+          <Paper
+            sx={{ width: "100%", p: 1.5, boxShadow: 5, borderRadius: "8px" }}
+          >
+            <Typography variant="body1" fontWeight="500" gutterBottom>
+              {poll.description}
+            </Typography>
           </Paper>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+            onClick={handleGenerate}
+          >
+            Generate
+          </Button>
+          {generatedResponse && (
+            <Paper
+              sx={{
+                marginTop: 3,
+                padding: 2,
+                width: "100%",
+                backgroundColor: theme.palette.background.default,
+                boxShadow: 4,
+              }}
+            >
+              <Typography variant="h6" color="black" fontWeight="bold">
+                Generated Response:
+              </Typography>
+              <Typography variant="body1" color="black">
+                {generatedResponse}
+              </Typography>
+            </Paper>
+          )}
           {/* Information Section */}
           <Box mt={3} width="100%">
             {/* Summary */}
-            <Typography variant="subtitle1" fontWeight="bold" color="black" mb={1}>
+            <Typography
+              variant="subtitle1"
+              fontWeight="bold"
+              color="black"
+              mb={1}
+            >
               Summary:
             </Typography>
-            
-            <Typography textAlign='left' variant="body1" paragraph sx={{ lineHeight: 1.7, color: 'black' }}>
-              Finland allocates a portion of its health budget to mental health services, ensuring
-              resources for prevention, treatment, and rehabilitation. Understanding this budget helps
-              citizens stay informed about the country's investment in mental health and the ongoing
-              efforts to support those in need.
+
+            <Typography
+              textAlign="left"
+              variant="body1"
+              paragraph
+              sx={{ lineHeight: 1.7, color: "black" }}
+            >
+              INSERT SUMMARY HERE
             </Typography>
-            
+
             {/* Key Points Section */}
-            <Typography variant="subtitle1" fontWeight="bold" color="black" mt={2} mb={1}>
+            <Typography
+              variant="subtitle1"
+              fontWeight="bold"
+              color="black"
+              mt={2}
+              mb={1}
+            >
               Key Points:
             </Typography>
-            <Paper sx={{boxShadow: 7, p: 1.5, borderRadius: '8px'}}>
-            <Typography variant="body1" color="black" fontWeight="500" mb={1}>
-              La di da di da boo boo boo boo boo boo.
-            </Typography>
-            <Typography variant="body1" color="black" fontWeight="500" mb={1}>
-              La di da di da boo boo boo boo.
-            </Typography>
-            <Typography variant="body1" color="black" fontWeight="500" mb={1}>
-              La di da di da boo boo boo boo.
-            </Typography>
+            <Paper sx={{ boxShadow: 7, p: 1.5, borderRadius: "8px" }}>
+              <Typography variant="body1" color="black" fontWeight="500" mb={1}>
+                Key point 1
+              </Typography>
+              <Typography variant="body1" color="black" fontWeight="500" mb={1}>
+                Key point 2
+              </Typography>
+              <Typography variant="body1" color="black" fontWeight="500" mb={1}>
+                Key point 3
+              </Typography>
             </Paper>
 
             {/* Key Numbers Section */}
-            <Typography variant="subtitle1" fontWeight="bold" color="black" mt={2} mb={1}>
+            <Typography
+              variant="subtitle1"
+              fontWeight="bold"
+              color="black"
+              mt={2}
+              mb={1}
+            >
               Key Numbers:
             </Typography>
-            <DataItem label="Total Mental Health Budget" value="€1.5 billion" />
-            <DataItem label="Percentage of Health Budget" value="12%" />
-            <DataItem label="Annual Increase" value="+5% in the last two years" />
+            <DataItem label="Key number 1" value="€1.5 billion" />
+            <DataItem label="Key number 2" value="12%" />
+            <DataItem label="Key number 3" value="+5% in the last two years" />
           </Box>
 
           {/* Voting buttons */}
           <Stack direction="row" spacing={2} alignItems="center" mt={2}>
-            {['positive', 'negative'].map((type) => (
+            {["positive", "negative"].map((type) => (
               <Button
                 key={type}
                 onClick={() => handleVote(type as VoteType)}
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
+                  display: "flex",
+                  alignItems: "center",
                   padding: 1,
                   backgroundColor:
                     selectedVote === type
-                      ? type === 'positive'
-                        ? 'lightgreen'
-                        : 'lightcoral'
-                      : 'transparent',
-                  '&:hover': {
+                      ? type === "positive"
+                        ? "lightgreen"
+                        : "lightcoral"
+                      : "transparent",
+                  "&:hover": {
                     backgroundColor:
                       selectedVote === type
-                        ? type === 'positive'
-                          ? 'green'
-                          : 'red'
-                        : 'lightgray',
+                        ? type === "positive"
+                          ? "green"
+                          : "red"
+                        : "lightgray",
                   },
                 }}
               >
-                {type === 'positive' ? (
-                  <ThumbUpIcon sx={{ color: 'black' }} />
+                {type === "positive" ? (
+                  <ThumbUpIcon sx={{ color: "black" }} />
                 ) : (
-                  <ThumbDownIcon sx={{ color: 'black' }} />
+                  <ThumbDownIcon sx={{ color: "black" }} />
                 )}
-                <Typography variant="body1" sx={{ marginLeft: '4px' }}>
+                <Typography variant="body1" sx={{ marginLeft: "4px" }}>
                   {votes[type as VoteType]}
                 </Typography>
               </Button>
@@ -167,7 +247,12 @@ export default function Poll() {
           </Stack>
           <Button
             variant="outlined"
-            sx={{ marginTop: 3, color: theme.palette.grey[900], borderColor: theme.palette.grey[900], backgroundColor: theme.palette.primary.light }}
+            sx={{
+              marginTop: 3,
+              color: theme.palette.grey[900],
+              borderColor: theme.palette.grey[900],
+              backgroundColor: theme.palette.primary.light,
+            }}
             onClick={handleGoBack}
           >
             Submit
