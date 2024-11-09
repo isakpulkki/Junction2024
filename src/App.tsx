@@ -1,8 +1,5 @@
 import AuthenticationBar from './components/AuthenticationBar';
 import Voting from './components/Voting';
-import Settings from './components/Settings';
-import SingleVoting from './components/SingleVoting';
-import VotingHistory from './components/VotingHistory';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 
