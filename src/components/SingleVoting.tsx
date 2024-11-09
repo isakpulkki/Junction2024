@@ -84,14 +84,6 @@ const SingleVoting = () => {
           </IconButton>
         </Box>
 
-        {/* Date and Star Icon */}
-        <Box display="flex" justifyContent="space-between" alignItems="center" mt={1}>
-          <Typography variant="caption" sx={{ color: '#FFD700' }}>
-            8.11.2024
-          </Typography>
-
-        </Box>
-
         <Divider sx={{ my: 2, backgroundColor: theme.palette.grey[700] }} />
 
         {/* Description Section */}
@@ -160,10 +152,13 @@ const SingleVoting = () => {
           </Typography>
           <Typography
             variant="body2"
-            sx={{ mt: 0.5, color: theme.palette.grey[500], fontStyle: 'italic' }}
+            sx={{ mt: 0.5, mb: 1, color: theme.palette.grey[500], fontStyle: 'italic' }}
           >
             Data provided by Finland's National Institute for Health and Welfare (THL) and Ministry of
             Social Affairs and Health.
+          </Typography>
+          <Typography variant="caption" sx={{ color: '#FFD700' }}>
+            8.11.2024
           </Typography>
         </Box>
 
