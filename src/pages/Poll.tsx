@@ -8,11 +8,7 @@ import {
   Stack,
   Button,
   Paper,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { theme } from '../App';
@@ -46,12 +42,12 @@ export default function Poll() {
 
   const DataItem = ({ label, value }: { label: string; value: string }) => (
     <Box display="flex" alignItems="center" gap={2} mb={1} justifyContent="space-between" width="100%">
-      <Typography variant="body2" color="white" sx={{ minWidth: '100px', textAlign: 'left' }}>
+      <Typography variant="body2" color="black" sx={{ minWidth: '100px', textAlign: 'left' }}>
         {label}
       </Typography>
       <Paper
         sx={{
-          backgroundColor: theme.palette.grey[800],
+          backgroundColor: theme.palette.info.light,
           p: 0.7,
           borderRadius: 1,
           width: '30%',
@@ -70,7 +66,7 @@ export default function Poll() {
   return (
     <ThemeProvider theme={theme}>
       <div style={{marginBottom: '10px'}}>
-      <AuthenticationBar />
+        <AuthenticationBar />
       </div>
       <Container>
         <Box
@@ -82,58 +78,54 @@ export default function Poll() {
             minHeight: '80vh',
             padding: 4,
             textAlign: 'center',
+            my: 2,
           }}
         >
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h4" fontWeight='600' gutterBottom sx={{ mb: 3}}>
             {poll.title}
           </Typography>
-          <Typography variant="body1" gutterBottom>
+          <Paper sx={{width: '100%', p: 1.5, boxShadow: 5, borderRadius: '8px'}}>
+          <Typography variant="body1" fontWeight='500' gutterBottom>
             {poll.description}
           </Typography>
-          
-          {/* Dropdown Accordion */}
+          </Paper>
+          {/* Information Section */}
           <Box mt={3} width="100%">
-            <Accordion sx={{backgroundColor: "#333333"}}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="subtitle1" fontWeight="bold" color="white">
-                  Read more
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                {/* Summary */}
-                <Typography variant="subtitle1" fontWeight="bold" color="white" mb={1}>
-                  Summary:
-                </Typography>
-                <Typography variant="body1" paragraph sx={{ lineHeight: 1.7, color: 'white' }}>
-                  Finland allocates a portion of its health budget to mental health services, ensuring
-                  resources for prevention, treatment, and rehabilitation. Understanding this budget helps
-                  citizens stay informed about the country's investment in mental health and the ongoing
-                  efforts to support those in need.
-                </Typography>
-                
-                {/* Key Points Section */}
-                <Typography variant="subtitle1" fontWeight="bold" color="white" mt={2} mb={1}>
-                  Key Points:
-                </Typography>
-                <Typography variant="body1" color="white" mb={1}>
-                  La di da di da boo boo boo boo.
-                </Typography>
-                <Typography variant="body1" color="white" mb={1}>
-                  La di da di da boo boo boo boo.
-                </Typography>
-                <Typography variant="body1" color="white" mb={1}>
-                  La di da di da boo boo boo boo.
-                </Typography>
+            {/* Summary */}
+            <Typography variant="subtitle1" fontWeight="bold" color="black" mb={1}>
+              Summary:
+            </Typography>
+            
+            <Typography textAlign='left' variant="body1" paragraph sx={{ lineHeight: 1.7, color: 'black' }}>
+              Finland allocates a portion of its health budget to mental health services, ensuring
+              resources for prevention, treatment, and rehabilitation. Understanding this budget helps
+              citizens stay informed about the country's investment in mental health and the ongoing
+              efforts to support those in need.
+            </Typography>
+            
+            {/* Key Points Section */}
+            <Typography variant="subtitle1" fontWeight="bold" color="black" mt={2} mb={1}>
+              Key Points:
+            </Typography>
+            <Paper sx={{boxShadow: 7, p: 1.5, borderRadius: '8px'}}>
+            <Typography variant="body1" color="black" fontWeight="500" mb={1}>
+              La di da di da boo boo boo boo boo boo.
+            </Typography>
+            <Typography variant="body1" color="black" fontWeight="500" mb={1}>
+              La di da di da boo boo boo boo.
+            </Typography>
+            <Typography variant="body1" color="black" fontWeight="500" mb={1}>
+              La di da di da boo boo boo boo.
+            </Typography>
+            </Paper>
 
-                {/* Key Numbers Section */}
-                <Typography variant="subtitle1" fontWeight="bold" color="white" mt={2} mb={1}>
-                  Key Numbers:
-                </Typography>
-                <DataItem label="Total Mental Health Budget" value="€1.5 billion" />
-                <DataItem label="Percentage of Health Budget" value="12%" />
-                <DataItem label="Annual Increase" value="+5% in the last two years" />
-              </AccordionDetails>
-            </Accordion>
+            {/* Key Numbers Section */}
+            <Typography variant="subtitle1" fontWeight="bold" color="black" mt={2} mb={1}>
+              Key Numbers:
+            </Typography>
+            <DataItem label="Total Mental Health Budget" value="€1.5 billion" />
+            <DataItem label="Percentage of Health Budget" value="12%" />
+            <DataItem label="Annual Increase" value="+5% in the last two years" />
           </Box>
 
           {/* Voting buttons */}
@@ -163,9 +155,9 @@ export default function Poll() {
                 }}
               >
                 {type === 'positive' ? (
-                  <ThumbUpIcon sx={{ color: 'green' }} />
+                  <ThumbUpIcon sx={{ color: 'black' }} />
                 ) : (
-                  <ThumbDownIcon color="error" />
+                  <ThumbDownIcon sx={{ color: 'black' }} />
                 )}
                 <Typography variant="body1" sx={{ marginLeft: '4px' }}>
                   {votes[type as VoteType]}
@@ -175,10 +167,10 @@ export default function Poll() {
           </Stack>
           <Button
             variant="outlined"
-            sx={{ marginTop: 3 }}
+            sx={{ marginTop: 3, color: theme.palette.grey[900], borderColor: theme.palette.grey[900], backgroundColor: theme.palette.primary.light }}
             onClick={handleGoBack}
           >
-            Go Back
+            Submit
           </Button>
         </Box>
       </Container>

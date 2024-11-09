@@ -1,9 +1,10 @@
 import { createTheme } from '@mui/material/styles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import VotingMainPage from './pages/Voting';
+import VotingListPage from './pages/Voting';
 import HistoryPage from './pages/History';
 import PollPage from './pages/Poll';
 import AuthenticationPage from './pages/Authentication';
+
 declare module '@mui/material/styles' {
   interface Theme {
     status: {
@@ -17,19 +18,25 @@ declare module '@mui/material/styles' {
   }
 }
 
+
 export const theme = createTheme({
   colorSchemes: {
-    dark: {
+    light: {
       palette: {
-        primary: { main: '#f5f5f5' },
+        primary: { main: '#ffffff', },
+        secondary: { main: '#ffffff' },
+        info: { main: '#003580' }
       },
     },
   },
   typography: {
-    fontFamily: 'sans-serif',
+    allVariants: {
+      color: 'black'
+    },
+    fontFamily: 'DM Sans, sans-serif',
     button: {
       textTransform: 'none',
-      fontFamily: 'monospace',
+      fontFamily: 'DM Sans, sans-serif',
       letterSpacing: '.1rem',
     },
   },
@@ -39,7 +46,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<VotingMainPage />} />
+        <Route path="/" element={<VotingListPage />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/poll" element={<PollPage />} />
         <Route path="/authentication" element={<AuthenticationPage />} />
