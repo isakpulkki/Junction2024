@@ -3,6 +3,7 @@ import { createTheme } from '@mui/material/styles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import VotingPage from './pages/Voting'; 
 import HistoryPage from './pages/History';
+import SingleVoting from './components/SingleVoting';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -42,6 +43,7 @@ function App() {
       <Routes>
         <Route path="/" element={<VotingPage />} />
         <Route path="/history" element={<HistoryPage/>} />
+        <Route path="/single-voting" element={<SingleVoting/>}  />
       </Routes>
     </Router>
   );

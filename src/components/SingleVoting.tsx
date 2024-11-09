@@ -56,20 +56,14 @@ const SingleVoting = () => {
         {/* Header Section */}
         <Box
           sx={{
-            pb: 1,
+            display: "flex", justifyContent: "space-between", alignItems: "center",
             borderBottom: `1px solid ${theme.palette.grey[700]}`,
             mb: 2,
+            pb: 2
           }}
         >
           <Typography variant="h5" fontWeight="bold" color="white">
             Mental Health Budget
-          </Typography>
-        </Box>
-
-        {/* Date and Star Icon */}
-        <Box display="flex" justifyContent="space-between" alignItems="center" mt={1}>
-          <Typography variant="caption" sx={{ color: '#FFD700' }}>
-            8.11.2024
           </Typography>
           <IconButton
             onClick={() => setIsFavorited(!isFavorited)}
@@ -90,9 +84,20 @@ const SingleVoting = () => {
           </IconButton>
         </Box>
 
+        {/* Date and Star Icon */}
+        <Box display="flex" justifyContent="space-between" alignItems="center" mt={1}>
+          <Typography variant="caption" sx={{ color: '#FFD700' }}>
+            8.11.2024
+          </Typography>
+
+        </Box>
+
         <Divider sx={{ my: 2, backgroundColor: theme.palette.grey[700] }} />
 
         {/* Description Section */}
+        <Typography variant="subtitle1" fontWeight="bold" color="white">
+          Summary:
+        </Typography>
         <Paper
           elevation={0}
           sx={{
@@ -108,6 +113,24 @@ const SingleVoting = () => {
             efforts to support those in need.
           </Typography>
         </Paper>
+
+        {/* Key Points Section */}
+        <Box mt={3}>
+          <Typography variant="subtitle1" fontWeight="bold" color="white" mb={2}>
+            Key Points:
+          </Typography>
+          <Box pl={4}>
+            <Typography variant="body1" color="white" mb={1}>
+              La di da di da boo boo boo boo.
+            </Typography>
+            <Typography variant="body1" color="white" mb={1}>
+              La di da di da boo boo boo boo.
+            </Typography>
+            <Typography variant="body1" color="white" mb={1}>
+              La di da di da boo boo boo boo.
+            </Typography>
+          </Box>
+        </Box>
 
         {/* Key Numbers Section */}
         <Box mt={3}>
