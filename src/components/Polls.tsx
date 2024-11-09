@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid2';
 import { useNavigate } from 'react-router-dom';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 interface Poll {
   title: string;
@@ -35,10 +36,20 @@ const Polls: React.FC<MyComponentProps> = ({ polls }) => {
           marginBottom: 3,
         }}
       >
-        <Box display="flex" alignItems="center" gap={2}>
+        <Box display="flex" alignItems="center" gap={0}>
           <Typography variant="h3">Polls</Typography>
-          <FormControl fullWidth>
-            <Select defaultValue="All">
+          <FormControl fullWidth >
+        <Select
+          sx={{
+            border: 'none', 
+            '& .MuiOutlinedInput-notchedOutline': {
+              border: 'none', 
+            },}}
+          defaultValue="All"
+          displayEmpty
+          IconComponent={FilterListIcon} 
+          renderValue={() => ''} // 
+        >
               <MenuItem value="All">All</MenuItem>
               <MenuItem value="Hot">Hot</MenuItem>
               <MenuItem value="Euro">Euro</MenuItem>
@@ -57,10 +68,10 @@ const Polls: React.FC<MyComponentProps> = ({ polls }) => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '31vh',
+   
                 margin: '8px',
                 padding: '16px',
-                borderRadius: '6px',
+                borderRadius: '8px',
                 boxShadow: '12'
               }}
               onClick={() => navigate('/poll', { state: { poll } })}
@@ -69,13 +80,13 @@ const Polls: React.FC<MyComponentProps> = ({ polls }) => {
               <Typography>{poll.description}</Typography>
               <Stack direction="row" spacing={2} alignItems="center" my={2}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ThumbUpIcon sx={{ color: 'green' }} />
+                  <ThumbUpIcon sx={{ color: 'black' }} />
                   <Typography variant="body2" sx={{ marginLeft: '4px' }}>
                     {poll.positiveVotes}
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ThumbDownIcon color="error" />
+                  <ThumbDownIcon sx={{ color: 'black' }} />
                   <Typography variant="body2" sx={{ marginLeft: '4px' }}>
                     {poll.negativeVotes}
                   </Typography>

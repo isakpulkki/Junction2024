@@ -23,7 +23,7 @@ export const theme = createTheme({
   colorSchemes: {
     light: {
       palette: {
-        primary: { main: '#ffffff' },
+        primary: { main: '#ffffff', },
         secondary: { main: '#ffffff' },
         info: { main: '#003580' }
       },
@@ -33,7 +33,7 @@ export const theme = createTheme({
     allVariants: {
       color: 'black'
     },
-    fontFamily: 'DM Sans, sans-serif', // Set DM Sans as default font
+    fontFamily: 'DM Sans, sans-serif',
     button: {
       textTransform: 'none',
       fontFamily: 'DM Sans, sans-serif',

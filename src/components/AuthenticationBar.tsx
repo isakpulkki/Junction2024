@@ -32,7 +32,7 @@ function AuthenticationBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{boxShadow: '1',}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Typography
