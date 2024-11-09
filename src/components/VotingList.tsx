@@ -79,20 +79,23 @@ const VotingList: React.FC<MyComponentProps> = ({ polls }) => {
             >
               <Typography sx={{my:1}} variant="h6" fontWeight='500'>{poll.title}</Typography>
               <Typography>{poll.description}</Typography>
-              <Stack direction="row" spacing={2} alignItems="center" my={2}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ThumbUpIcon sx={{ color: 'black' }} />
-                  <Typography variant="body2" sx={{ marginLeft: '4px' }}>
-                    {poll.positiveVotes}
-                  </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ThumbDownIcon sx={{ color: 'black' }} />
-                  <Typography variant="body2" sx={{ marginLeft: '4px' }}>
-                    {poll.negativeVotes}
-                  </Typography>
-                </Box>
-              </Stack>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', mt: 2 }}>
+                <Typography variant="body2">{`${new Date(poll.pubDate).getDate().toString().padStart(2, '0')}.${(new Date(poll.pubDate).getMonth() + 1).toString().padStart(2, '0')}.${new Date(poll.pubDate).getFullYear()}`}</Typography>
+                <Stack direction="row" spacing={2} alignItems="center">
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <ThumbUpIcon sx={{ color: 'black' }} />
+                    <Typography variant="body2" sx={{ marginLeft: '4px' }}>
+                      {poll.positiveVotes}
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <ThumbDownIcon sx={{ color: 'black' }} />
+                    <Typography variant="body2" sx={{ marginLeft: '4px' }}>
+                      {poll.negativeVotes}
+                    </Typography>
+                  </Box>
+                </Stack>
+              </Box>
             </Button>
           </Grid>
         ))}
