@@ -90,6 +90,13 @@ export default function Poll() {
           <Typography variant="body1" gutterBottom>
             {poll.description}
           </Typography>
+          <Typography variant="body1" gutterBottom>
+            {poll.pubDate}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {poll.link}
+          </Typography>
+          
           
           {/* Dropdown Accordion */}
           <Box mt={3} width="100%">
