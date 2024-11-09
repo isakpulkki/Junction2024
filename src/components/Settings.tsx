@@ -1,84 +1,79 @@
 // Settings.tsx
 import React, { useState } from 'react';
 import {
-  Box,
   Container,
   Typography,
   Switch,
   FormControlLabel,
   FormGroup,
-  Divider,
-  Paper,
+  Button,
+  Select,
+  MenuItem,
+  Box,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
-
-const MaskedName = styled(Typography)(({ theme }) => ({
-  fontSize: '1.5rem',
-  fontWeight: 'bold',
-  letterSpacing: '0.1em',
-}));
 
 const Settings: React.FC = () => {
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
-
-  const handleNotificationToggle = () => {
-    setNotifications((prev) => !prev);
-  };
-
-  const handleDarkModeToggle = () => {
-    setDarkMode((prev) => !prev);
-    // Add any theme toggling logic if necessary
-  };
+  const [language, setLanguage] = useState('English');
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Paper elevation={3} sx={{ p: 3 }}>
-        <Typography variant="h4" gutterBottom>
-          Settings
-        </Typography>
-        <Divider sx={{ mb: 2 }} />
+    <Container>
+      <Typography variant="h5">Settings</Typography>
 
-        <Box display="flex" flexDirection="column" gap={2}>
-          {/* Display Name */}
-          <Box>
-            <Typography variant="subtitle1" color="textSecondary">
-              Name
-            </Typography>
-            <MaskedName>
-              C***GPT
-            </MaskedName>
-          </Box>
+      {/* Name */}
+      <Typography variant="subtitle1">Name</Typography>
+      <Typography variant="body1">Jaakko ********</Typography>
 
-          {/* Notifications Toggle */}
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={notifications}
-                  onChange={handleNotificationToggle}
-                  color="primary"
-                />
-              }
-              label="Enable Notifications"
+      {/* Notifications Toggle */}
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={notifications}
+              onChange={() => setNotifications(!notifications)}
             />
-          </FormGroup>
+          }
+          label="Enable Notifications"
+        />
+      </FormGroup>
 
-          {/* Dark Mode Toggle */}
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={darkMode}
-                  onChange={handleDarkModeToggle}
-                  color="primary"
-                />
-              }
-              label="Dark Mode"
+      {/* Dark Mode Toggle */}
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={darkMode}
+              onChange={() => setDarkMode(!darkMode)}
             />
-          </FormGroup>
-        </Box>
-      </Paper>
+          }
+          label="Dark Mode"
+        />
+      </FormGroup>
+
+      {/* Language Selection with White Background */}
+      <Typography variant="subtitle1">Language</Typography>
+      <Box sx={{ backgroundColor: 'white', borderRadius: 1 }}>
+        <Select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value as string)}
+          fullWidth
+        >
+          <MenuItem value="English">English</MenuItem>
+          <MenuItem value="Finnish">Finnish</MenuItem>
+          <MenuItem value="Swedish">Swedish</MenuItem>
+        </Select>
+      </Box>
+
+      {/* Log Out Button */}
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => alert('Logged out')}
+        sx={{ mt: 2 }}
+      >
+        Log Out
+      </Button>
     </Container>
   );
 };
