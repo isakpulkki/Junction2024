@@ -4,6 +4,10 @@ import AuthenticationBar from '../components/AuthenticationBar';
 import Voting from '../components/Voting';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../App'; 
+import SingleVoting from '../components/SingleVoting';
+import Settings from '../components/Settings';
+import VotingHistory from '../components/VotingHistory';
+
 
 export default function VotingPage() {
 
@@ -25,6 +29,9 @@ export default function VotingPage() {
     <ThemeProvider theme={theme}>
       <AuthenticationBar />
       <Voting items={items} />
+      <SingleVoting/>
+      <Settings/>
+      <VotingHistory/>
     </ThemeProvider>
   );
 }
