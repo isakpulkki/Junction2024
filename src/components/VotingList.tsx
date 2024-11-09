@@ -21,7 +21,7 @@ interface MyComponentProps {
   polls: Poll[];
 }
 
-const Polls: React.FC<MyComponentProps> = ({ polls }) => {
+const VotingList: React.FC<MyComponentProps> = ({ polls }) => {
   const navigate = useNavigate();
 
 
@@ -90,5 +90,5 @@ const Polls: React.FC<MyComponentProps> = ({ polls }) => {
 };
 
 
-export default Polls;
+export default VotingList;
 
