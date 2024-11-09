@@ -1,46 +1,60 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import React, { useState, useEffect } from 'react';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  Container,
+  Button,
+} from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useNavigate } from 'react-router-dom';
 
 function AuthenticationBar() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedAuthState = localStorage.getItem('isAuthenticated');
+    if (storedAuthState === 'true') setIsAuthenticated(true);
+  }, []);
+
   const handleAuthenticateClick = () => {
-    navigate('/authentication');
+    if (isAuthenticated) {
+      setIsAuthenticated(false);
+      localStorage.setItem('isAuthenticated', 'false');
+      navigate('/authentication');
+    } else {
+      setIsAuthenticated(true);
+      localStorage.setItem('isAuthenticated', 'true');
+    }
   };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar
-          disableGutters
-          sx={{
-            justifyContent: 'space-between',
-          }}
-        >
+        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Typography
             variant="h5"
             noWrap
-            sx={{
-              mr: 2,
-              letterSpacing: '.3rem',
-              cursor: 'pointer',
-            }}
+            sx={{ cursor: 'pointer' }}
             onClick={() => navigate('/')}
           >
             Voice
           </Typography>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box>
             <Button
               variant="contained"
               color="primary"
               onClick={handleAuthenticateClick}
             >
-              <LockIcon sx={{ mr: 1 }} /> Authenticate
+              {isAuthenticated ? (
+                <LockIcon sx={{ mr: 1 }} />
+              ) : (
+                <LockOpenIcon sx={{ mr: 1 }} />
+              )}
+              {isAuthenticated ? 'Authenticate' : 'Log out'}
             </Button>
           </Box>
         </Toolbar>
@@ -48,4 +62,5 @@ function AuthenticationBar() {
     </AppBar>
   );
 }
+
 export default AuthenticationBar;
