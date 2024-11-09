@@ -89,9 +89,10 @@ export default function Poll() {
       }
 
       const data = await response.json();
-      setGeneratedResponse(data.response || "No response generated.");
+      console.log("Server response data:", data); // Log the full response
+      setGeneratedResponse(data.response.summary || "No summary found.");
     } catch (error) {
-      console.error("Error in handleGenerate:", error); // Log detailed error
+      console.error("Error in handleGenerate:", error);
       setGeneratedResponse("An error occurred while generating the response.");
     }
   };
