@@ -49,7 +49,7 @@ const Polls: React.FC<MyComponentProps> = ({ polls }) => {
       </Container>
       <Grid container spacing={3} columns={{ md: 2 }}>
         {polls.map((poll) => (
-          <Grid size={1}>
+          <Grid size={1} >
             <Button
               variant="contained"
               sx={{
@@ -57,15 +57,17 @@ const Polls: React.FC<MyComponentProps> = ({ polls }) => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '30vh',
+                height: '31vh',
                 margin: '8px',
                 padding: '16px',
+                borderRadius: '6px',
+                boxShadow: '12'
               }}
               onClick={() => navigate('/poll', { state: { poll } })}
             >
-              <Typography variant="h6">{poll.title}</Typography>
+              <Typography sx={{my:1}} variant="h6" fontWeight='500'>{poll.title}</Typography>
               <Typography>{poll.description}</Typography>
-              <Stack direction="row" spacing={2} alignItems="center" mt={2}>
+              <Stack direction="row" spacing={2} alignItems="center" my={2}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <ThumbUpIcon sx={{ color: 'green' }} />
                   <Typography variant="body2" sx={{ marginLeft: '4px' }}>
