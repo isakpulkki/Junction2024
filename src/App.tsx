@@ -26,7 +26,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'monospace',
+    fontFamily: 'sans-serif',
     button: {
       textTransform: 'none',
       fontFamily: 'monospace',
