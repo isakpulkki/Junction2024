@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PollChoicesPage from './pages/PollChoices';
 import HistoryPage from './pages/History';
 import PollPage from './pages/Poll';
+import AuthenticationPage from './pages/Authentication';
 declare module '@mui/material/styles' {
   interface Theme {
     status: {
@@ -41,6 +42,7 @@ function App() {
         <Route path="/" element={<PollChoicesPage />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/poll" element={<PollPage />} />
+        <Route path="/authentication" element={<AuthenticationPage />} />
       </Routes>
     </Router>
   );

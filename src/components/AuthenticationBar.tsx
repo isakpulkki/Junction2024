@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom';
 
 function AuthenticationBar() {
   const navigate = useNavigate();
+  const handleAuthenticateClick = () => {
+    navigate('/authentication');
+  };
 
   return (
     <AppBar position="static">
@@ -25,14 +28,18 @@ function AuthenticationBar() {
             sx={{
               mr: 2,
               letterSpacing: '.3rem',
-              cursor: 'pointer'
+              cursor: 'pointer',
             }}
-            onClick={() => navigate('/')} 
+            onClick={() => navigate('/')}
           >
             Voice
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleAuthenticateClick}
+            >
               <LockIcon sx={{ mr: 1 }} /> Authenticate
             </Button>
           </Box>

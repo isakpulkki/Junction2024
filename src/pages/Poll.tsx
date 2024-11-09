@@ -52,7 +52,6 @@ export default function Poll() {
             alignItems: 'center',
             justifyContent: 'center',
             minHeight: '80vh',
-            padding: 4,
             textAlign: 'center',
           }}
         >
@@ -92,7 +91,7 @@ export default function Poll() {
                 ) : (
                   <ThumbDownIcon color="error" />
                 )}
-                <Typography variant="body1" sx={{ marginLeft: '4px' }}>
+                <Typography variant="body1">
                   {votes[type as VoteType]}
                 </Typography>
               </Button>
