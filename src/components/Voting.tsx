@@ -1,6 +1,6 @@
 // Voting.tsx
 import React from 'react';
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Typography, Container, Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -32,7 +32,7 @@ const Voting: React.FC<MyComponentProps> = ({ items }) => {
           <Typography variant="h3">Voting</Typography>
           <FormControl fullWidth>
             <Select defaultValue="All">
-            <MenuItem value="All">All</MenuItem>
+              <MenuItem value="All">All</MenuItem>
               <MenuItem value="Hot">Hot</MenuItem>
               <MenuItem value="Euro">Euro</MenuItem>
               <MenuItem value="Budget">Budget</MenuItem>
@@ -43,22 +43,21 @@ const Voting: React.FC<MyComponentProps> = ({ items }) => {
       <Grid container spacing={3} columns={{ md: 2 }}>
         {items.map((item) => (
           <Grid size={1}>
-            <Box
+            <Button
+              variant="contained"
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
                 height: '20vh',
-                border: '1px solid',
-                borderRadius: '12px',
                 margin: '8px',
                 padding: '16px',
               }}
             >
               <Typography variant="h6">{item.title}</Typography>
               <Typography>{item.description}</Typography>
-            </Box>
+            </Button>
           </Grid>
         ))}
       </Grid>

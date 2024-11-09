@@ -1,6 +1,9 @@
 import AuthenticationBar from './components/AuthenticationBar';
 import Voting from './components/Voting';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import VotingHistory from './components/VotingHistory';
+import SingleVoting from './components/SingleVoting';
+import Settings from './components/Settings';
 import { useEffect, useState } from 'react';
 
 declare module '@mui/material/styles' {
