@@ -1,4 +1,4 @@
-// Polls.tsx
+
 import React from 'react';
 import { Box, Typography, Container, Button, Stack } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
@@ -14,6 +14,7 @@ interface Poll {
   description: string;
   positiveVotes: number;
   negativeVotes: number;
+  link: string;
 }
 
 interface MyComponentProps {
@@ -22,6 +23,7 @@ interface MyComponentProps {
 
 const Polls: React.FC<MyComponentProps> = ({ polls }) => {
   const navigate = useNavigate();
+
 
   return (
     <Container>
@@ -87,4 +89,6 @@ const Polls: React.FC<MyComponentProps> = ({ polls }) => {
   );
 };
 
+
 export default Polls;
+

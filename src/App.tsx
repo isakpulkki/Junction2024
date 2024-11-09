@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import PollChoicesPage from './pages/PollChoices';
+import VotingMainPage from './pages/Voting';
 import HistoryPage from './pages/History';
 import PollPage from './pages/Poll';
 import AuthenticationPage from './pages/Authentication';
@@ -39,7 +39,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<PollChoicesPage />} />
+        <Route path="/" element={<VotingMainPage />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/poll" element={<PollPage />} />
         <Route path="/authentication" element={<AuthenticationPage />} />
