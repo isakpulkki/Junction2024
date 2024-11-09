@@ -1,9 +1,8 @@
-
 import { createTheme } from '@mui/material/styles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import VotingPage from './pages/Voting'; 
+import PollChoicesPage from './pages/PollChoices';
 import HistoryPage from './pages/History';
-
+import PollPage from './pages/Poll';
 declare module '@mui/material/styles' {
   interface Theme {
     status: {
@@ -36,12 +35,12 @@ export const theme = createTheme({
 });
 
 function App() {
-
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<VotingPage />} />
-        <Route path="/history" element={<HistoryPage/>} />
+        <Route path="/" element={<PollChoicesPage />} />
+        <Route path="/history" element={<HistoryPage />} />
+        <Route path="/poll" element={<PollPage />} />
       </Routes>
     </Router>
   );
