@@ -1,21 +1,28 @@
-// Voting.tsx
+// Polls.tsx
 import React from 'react';
-import { Box, Typography, Container, Button } from '@mui/material';
+import { Box, Typography, Container, Button, Stack } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid2';
+import { useNavigate } from 'react-router-dom';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
-interface Item {
+interface Poll {
   title: string;
   description: string;
+  positiveVotes: number;
+  negativeVotes: number;
 }
 
 interface MyComponentProps {
-  items: Item[];
+  polls: Poll[];
 }
 
-const Voting: React.FC<MyComponentProps> = ({ items }) => {
+const Polls: React.FC<MyComponentProps> = ({ polls }) => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Container
@@ -29,7 +36,7 @@ const Voting: React.FC<MyComponentProps> = ({ items }) => {
         }}
       >
         <Box display="flex" alignItems="center" gap={2}>
-          <Typography variant="h3">Voting</Typography>
+          <Typography variant="h3">Polls</Typography>
           <FormControl fullWidth>
             <Select defaultValue="All">
               <MenuItem value="All">All</MenuItem>
@@ -41,7 +48,7 @@ const Voting: React.FC<MyComponentProps> = ({ items }) => {
         </Box>
       </Container>
       <Grid container spacing={3} columns={{ md: 2 }}>
-        {items.map((item) => (
+        {polls.map((poll) => (
           <Grid size={1}>
             <Button
               variant="contained"
@@ -50,13 +57,28 @@ const Voting: React.FC<MyComponentProps> = ({ items }) => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '20vh',
+                height: '30vh',
                 margin: '8px',
                 padding: '16px',
               }}
+              onClick={() => navigate('/poll', { state: { poll } })}
             >
-              <Typography variant="h6">{item.title}</Typography>
-              <Typography>{item.description}</Typography>
+              <Typography variant="h6">{poll.title}</Typography>
+              <Typography>{poll.description}</Typography>
+              <Stack direction="row" spacing={2} alignItems="center" mt={2}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <ThumbUpIcon sx={{ color: 'green' }} />
+                  <Typography variant="body2" sx={{ marginLeft: '4px' }}>
+                    {poll.positiveVotes}
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <ThumbDownIcon color="error" />
+                  <Typography variant="body2" sx={{ marginLeft: '4px' }}>
+                    {poll.negativeVotes}
+                  </Typography>
+                </Box>
+              </Stack>
             </Button>
           </Grid>
         ))}
@@ -65,4 +87,4 @@ const Voting: React.FC<MyComponentProps> = ({ items }) => {
   );
 };
 
-export default Voting;
+export default Polls;
