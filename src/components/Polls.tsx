@@ -12,17 +12,27 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 interface Poll {
   title: string;
   description: string;
+<<<<<<<< HEAD:src/components/Polls.tsx
   positiveVotes: number;
   negativeVotes: number;
+========
+  link: string;
+>>>>>>>> e5a6e14 (Added RSS-parsing):src/components/VotingList.tsx
 }
 
 interface MyComponentProps {
   polls: Poll[];
 }
 
+<<<<<<<< HEAD:src/components/Polls.tsx
 const Polls: React.FC<MyComponentProps> = ({ polls }) => {
   const navigate = useNavigate();
 
+========
+
+
+const VotingList: React.FC<MyComponentProps> = ({ items }) => {
+>>>>>>>> e5a6e14 (Added RSS-parsing):src/components/VotingList.tsx
   return (
     <Container>
       <Container
@@ -87,4 +97,8 @@ const Polls: React.FC<MyComponentProps> = ({ polls }) => {
   );
 };
 
+<<<<<<<< HEAD:src/components/Polls.tsx
 export default Polls;
+========
+export default VotingList;
+>>>>>>>> e5a6e14 (Added RSS-parsing):src/components/VotingList.tsx
