@@ -5,6 +5,8 @@ type RSSItem = {
   link: string;
   description: string;
   pubDate: string;
+  positiveVotes: number;
+  negativeVotes: number;
 };
 
 type RSSFeedResponse = {
@@ -30,6 +32,8 @@ export default function fetchRSSFeed(url: string) {
           link: item.link || '',
           description: item.description || '',
           pubDate: item.pubDate || '',
+          positiveVotes: Math.floor(Math.random() * 101),
+          negativeVotes: Math.floor(Math.random() * 101),
         }));
 
         setFeedData({ status: json.status, items: itemsArray });
