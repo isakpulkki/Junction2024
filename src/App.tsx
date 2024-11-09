@@ -1,10 +1,8 @@
-import AuthenticationBar from './components/AuthenticationBar';
-import Voting from './components/Voting';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import VotingHistory from './components/VotingHistory';
-import SingleVoting from './components/SingleVoting';
-import Settings from './components/Settings';
-import { useEffect, useState } from 'react';
+
+import { createTheme } from '@mui/material/styles';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import VotingPage from './pages/Voting'; 
+import HistoryPage from './pages/History';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -19,7 +17,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-const theme = createTheme({
+export const theme = createTheme({
   colorSchemes: {
     dark: {
       palette: {
@@ -38,24 +36,14 @@ const theme = createTheme({
 });
 
 function App() {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    fetch('/data.json')
-      .then((response) => response.json())
-      .then((data) => {
-        setItems(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching JSON: ', error);
-      });
-  }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <AuthenticationBar></AuthenticationBar>
-      <Voting items={items}></Voting>
-    </ThemeProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<VotingPage />} />
+        <Route path="/history" element={<HistoryPage/>} />
+      </Routes>
+    </Router>
   );
 }
 
