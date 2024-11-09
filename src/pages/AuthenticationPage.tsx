@@ -2,7 +2,7 @@
 import AuthenticationBar from '../components/AuthenticationBar';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../App'; 
-import AuthenticationPage from '../components/AuthenticationPage';
+import AuthenticationPage from '../components/Authentication';
 
 export default function AuthenticationPageWrapper() {
   return (

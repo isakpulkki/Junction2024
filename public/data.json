@@ -1,44 +1,62 @@
 [
-    {
-      "title": "Adopting a Digital Euro",
-      "description": "Should Finland support the adoption of a digital euro as an official currency alongside physical currency, to facilitate easier and faster digital payments?",
-      "score": 0
-    },
-    {
-      "title": "Strengthening Euro Stability",
-      "description": "Should Finland advocate for stricter fiscal policies within the Eurozone to enhance the euro's stability and prevent economic crises in member states?",
-      "score": 0
-    },
-    {
-      "title": "Eurozone Financial Aid Contributions",
-      "description": "Should Finland increase its contributions to financial aid programs within the Eurozone to support economically struggling member states?"
-    },
-    {
-      "title": "Increased Education Funding",
-      "description": "Should Finland increase its budget allocation for education, focusing on improving facilities, digital tools, and curriculum development?"
-    },
-    {
-      "title": "Defense Spending Adjustment",
-      "description": "Given recent geopolitical tensions, should Finland increase its defense budget to enhance national security?"
-    },
-    {
-      "title": "Healthcare System Modernization",
-      "description": "Should Finland allocate more funds to modernize healthcare facilities and incorporate new medical technologies?"
-    },
-    {
-      "title": "Funding Renewable Energy Sources",
-      "description": "To reach climate goals, should Finland increase funding for renewable energy projects, including wind, solar, and bioenergy?"
-    },
-    {
-      "title": "Reducing Plastic Waste",
-      "description": "Should Finland allocate more budget to programs that aim to reduce plastic waste through recycling incentives and public awareness campaigns?"
-    },
-    {
-      "title": "Protecting Natural Habitats",
-      "description": "Should Finland increase funding for the protection and restoration of natural habitats to preserve biodiversity?"
-    },
-    {
-      "title": "Universal Basic Income Pilot",
-      "description": "Should Finland expand its Universal Basic Income pilot program to provide a safety net for all citizens and reduce poverty?"
-    }
+  {
+    "title": "Adopting a Digital Euro",
+    "description": "Should Finland support the adoption of a digital euro as an official currency alongside physical currency, to facilitate easier and faster digital payments?",
+    "positiveVotes": 73,
+    "negativeVotes": 22
+  },
+  {
+    "title": "Strengthening Euro Stability",
+    "description": "Should Finland advocate for stricter fiscal policies within the Eurozone to enhance the euro's stability and prevent economic crises in member states?",
+    "positiveVotes": 45,
+    "negativeVotes": 67
+  },
+  {
+    "title": "Eurozone Financial Aid Contributions",
+    "description": "Should Finland increase its contributions to financial aid programs within the Eurozone to support economically struggling member states?",
+    "positiveVotes": 32,
+    "negativeVotes": 54
+  },
+  {
+    "title": "Increased Education Funding",
+    "description": "Should Finland increase its budget allocation for education, focusing on improving facilities, digital tools, and curriculum development?",
+    "positiveVotes": 88,
+    "negativeVotes": 15
+  },
+  {
+    "title": "Defense Spending Adjustment",
+    "description": "Given recent geopolitical tensions, should Finland increase its defense budget to enhance national security?",
+    "positiveVotes": 60,
+    "negativeVotes": 40
+  },
+  {
+    "title": "Healthcare System Modernization",
+    "description": "Should Finland allocate more funds to modernize healthcare facilities and incorporate new medical technologies?",
+    "positiveVotes": 79,
+    "negativeVotes": 21
+  },
+  {
+    "title": "Funding Renewable Energy Sources",
+    "description": "To reach climate goals, should Finland increase funding for renewable energy projects, including wind, solar, and bioenergy?",
+    "positiveVotes": 92,
+    "negativeVotes": 10
+  },
+  {
+    "title": "Reducing Plastic Waste",
+    "description": "Should Finland allocate more budget to programs that aim to reduce plastic waste through recycling incentives and public awareness campaigns?",
+    "positiveVotes": 68,
+    "negativeVotes": 34
+  },
+  {
+    "title": "Protecting Natural Habitats",
+    "description": "Should Finland increase funding for the protection and restoration of natural habitats to preserve biodiversity?",
+    "positiveVotes": 85,
+    "negativeVotes": 18
+  },
+  {
+    "title": "Universal Basic Income Pilot",
+    "description": "Should Finland expand its Universal Basic Income pilot program to provide a safety net for all citizens and reduce poverty?",
+    "positiveVotes": 50,
+    "negativeVotes": 50
+  }
 ]

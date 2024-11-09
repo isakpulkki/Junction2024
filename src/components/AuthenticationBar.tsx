@@ -5,8 +5,11 @@ import Typography from '@mui/material/Typography';
 import LockIcon from '@mui/icons-material/Lock';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
 function AuthenticationBar() {
+  const navigate = useNavigate();
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -22,7 +25,9 @@ function AuthenticationBar() {
             sx={{
               mr: 2,
               letterSpacing: '.3rem',
+              cursor: 'pointer'
             }}
+            onClick={() => navigate('/')} 
           >
             Voice
           </Typography>
