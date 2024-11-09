@@ -1,6 +1,7 @@
 import AuthenticationBar from './components/AuthenticationBar';
 import Voting from './components/Voting';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -34,11 +35,23 @@ const theme = createTheme({
 });
 
 function App() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch('/data.json')
+      .then((response) => response.json())
+      .then((data) => {
+        setItems(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching JSON: ', error);
+      });
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <AuthenticationBar></AuthenticationBar>
-      <Voting></Voting>
-      <Settings></Settings>
+      <Voting items={items}></Voting>
     </ThemeProvider>
   );
 }
