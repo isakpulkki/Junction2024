@@ -4,6 +4,7 @@ import { theme } from "../App";
 import fetchRSSFeed from "../hooks/fetchRSSFeeds";
 import { Typography } from "@mui/material";
 import VotingList from "../components/VotingList";
+import Sidebar from "../components/SideBar";
 
 export default function VotingPage() {
   // Tän idea fetchata data, joka löytyy data.json tiedostosta --> tähän RSS feedistä dataa
@@ -20,6 +21,7 @@ export default function VotingPage() {
   return (
     <ThemeProvider theme={theme}>
       <AuthenticationBar />
+      <Sidebar />
       <VotingList polls={items} />
     </ThemeProvider>
   );
