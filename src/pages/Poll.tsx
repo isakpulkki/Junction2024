@@ -12,8 +12,10 @@ import {
 } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { theme } from "../App";
 import { useLocation, useNavigate } from "react-router-dom";
+import Sidebar from "../components/SideBar";
 
 type VoteType = "positive" | "negative";
 
@@ -116,6 +118,7 @@ export default function Poll() {
     <ThemeProvider theme={theme}>
       <div style={{ marginBottom: "10px" }}>
         <AuthenticationBar />
+        <Sidebar />
       </div>
       <Container>
         <Box
@@ -130,12 +133,42 @@ export default function Poll() {
             my: 2,
           }}
         >
-          <Typography variant="h4" fontWeight="600" gutterBottom sx={{ mb: 3 }}>
-            {poll.title}
-          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              justifyContent: "space-between", // places items at the far ends with space in between
+              mb: 3,
+            }}
+          >
+            <Button
+              onClick={handleGoBack}
+              sx={{
+                color: theme.palette.grey[900],
+                backgroundColor: theme.palette.primary.light,
+                "&:hover": {
+                  backgroundColor: theme.palette.primary.dark,
+                },
+              }}
+            >
+              <ArrowBackIosNewIcon />
+            </Button>
+            {/* Spacer to center-align the title */}
+            <Typography variant="h4" fontWeight="600" sx={{ margin: "0 auto" }}>
+              {poll.title}
+            </Typography>
+            {/* Empty Box to act as a spacer on the right */}
+            <Box sx={{ width: "40px" }} />{" "}
+            {/* Adjust width to match button width for symmetry */}
+          </Box>
 
           <Typography variant="h6" fontWeight="500" gutterBottom>
-            {poll.description}
+            The government is proposing changes to several tax laws. These
+            changes would update the Public Broadcasting Tax, adjust the Value
+            Added Tax rules, and modify specific tax rules for the Åland
+            Islands. The goal is to improve how these taxes are applied and make
+            sure they are up-to-date.
           </Typography>
 
           {/* Information Section */}
@@ -266,19 +299,12 @@ export default function Poll() {
               </Button>
             ))}
           </Stack>
-          <Button
-            variant="outlined"
-            sx={{
-              marginTop: 3,
-              color: theme.palette.grey[900],
-              borderColor: theme.palette.grey[900],
-              backgroundColor: theme.palette.primary.light,
-            }}
-            onClick={handleGoBack}
-          >
-            Submit
-          </Button>
         </Box>
+        <Box
+          sx={{
+            py: 3, // Adds vertical padding (top and bottom)
+          }}
+        ></Box>
       </Container>
     </ThemeProvider>
   );

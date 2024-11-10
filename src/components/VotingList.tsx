@@ -37,9 +37,16 @@ const VotingList: React.FC<MyComponentProps> = ({ polls }) => {
           marginBottom: 3,
         }}
       >
-        <Box display="flex" alignItems="center" gap={0}>
-          <Typography variant="h3">Polls</Typography>
-          <FormControl fullWidth>
+        <Box
+          display="flex"
+          gap={0}
+          justifyContent="space-between"
+          alignItems="center"
+          width="100%"
+        >
+          <Typography variant="h3">Parliament proposals</Typography>
+
+          <FormControl>
             <Select
               sx={{
                 border: "none",
@@ -50,7 +57,7 @@ const VotingList: React.FC<MyComponentProps> = ({ polls }) => {
               defaultValue="All"
               displayEmpty
               IconComponent={FilterListIcon}
-              renderValue={() => ""} //
+              renderValue={() => ""} // Removes the label
             >
               <MenuItem value="All">All</MenuItem>
               <MenuItem value="Hot">Hot</MenuItem>
