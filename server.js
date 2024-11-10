@@ -19,28 +19,38 @@ const openai = new OpenAI({
 // Middleware for JSON parsing
 app.use(express.json());
 
-// Define the /api/summarize endpoint
 app.post("/api/summarize", async (req, res) => {
-  try {
-    // Simplified OpenAI API request without JSON schema format
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // Using gpt-3.5-turbo model
-      messages: [
-        { role: "system", content: demoPromptSystem },
-        { role: "user", content: demoPromptUser }, // default prompt content
-      ],
-    });
-
-    // Send the generated response directly back to the client
-    const generatedText = completion.choices[0].message.content;
-    res.json({ response: generatedText }); // Sending back as JSON with a key "response"
-  } catch (error) {
-    console.error("OpenAI API Error:", error); // Log full error
-    res.status(500).json({
-      error: error.message || "An unknown error occurred while generating the response.",
-    });
-  }
-});
+    try {
+      // Request a JSON-like response from OpenAI
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo", // Model selection
+        messages: [
+          { role: "system", content: demoPromptSystem },
+          {
+            role: "user",
+            content: demoPromptUser},
+        ],
+      });
+  
+      // Attempt to parse the response from OpenAI
+      const generatedText = completion.choices[0].message.content;
+      let parsedResponse;
+      try {
+        parsedResponse = JSON.parse(generatedText);
+      } catch (parseError) {
+        console.error("Error parsing OpenAI response as JSON:", parseError);
+        
+        // In case JSON parsing fails, wrap the response in a standard format
+        parsedResponse = { summary: generatedText, key_points: [] };
+      }
+  
+      // Send parsed JSON (or fallback) back to the frontend
+      res.json(parsedResponse);
+    } catch (error) {
+      console.error("OpenAI API Error:", error);
+      res.status(500).json({ error: error.message || "An unknown error occurred" });
+    }
+  });
 
 // Start the server
 app.listen(port, () => {

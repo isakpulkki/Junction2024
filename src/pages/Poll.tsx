@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AuthenticationBar from "../components/AuthenticationBar";
 import {
   ThemeProvider,
@@ -8,6 +8,7 @@ import {
   Stack,
   Button,
   Paper,
+  Skeleton,
 } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
@@ -71,30 +72,45 @@ export default function Poll() {
       </Paper>
     </Box>
   );
-  const [generatedResponse, setGeneratedResponse] = useState<string | null>(
-    null
-  );
+
+  const [summary, setSummary] = useState<string | null>(null);
+  const [keyPoints, setKeyPoints] = useState<string[]>([]);
+  const [keyFigures, setKeyFigures] = useState<
+    { label: string; value: string }[]
+  >([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleGoBack = () => navigate(-1);
-  const handleGenerate = async () => {
-    try {
-      const response = await fetch("http://localhost:3001/api/summarize", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Server response error:", errorText); // Log response error
-        throw new Error("Failed to fetch from the server");
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch("http://localhost:3001/api/summarize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Server response error:", errorText);
+          throw new Error("Failed to fetch from the server");
+        }
+
+        const data = await response.json();
+        setSummary(data.summary || "No summary found.");
+        setKeyPoints(data.key_points || []);
+        setKeyFigures(data.key_figures || []);
+      } catch (error) {
+        console.error("Error in fetchData:", error);
+        setSummary("An error occurred while generating the response.");
+      } finally {
+        setLoading(false);
       }
+    };
 
-      const data = await response.json();
-      setGeneratedResponse(data.response || "No response generated.");
-    } catch (error) {
-      console.error("Error in handleGenerate:", error); // Log detailed error
-      setGeneratedResponse("An error occurred while generating the response.");
-    }
-  };
+    fetchData();
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -117,42 +133,14 @@ export default function Poll() {
           <Typography variant="h4" fontWeight="600" gutterBottom sx={{ mb: 3 }}>
             {poll.title}
           </Typography>
-          <Paper
-            sx={{ width: "100%", p: 1.5, boxShadow: 5, borderRadius: "8px" }}
-          >
-            <Typography variant="body1" fontWeight="500" gutterBottom>
-              {poll.description}
-            </Typography>
-          </Paper>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ mt: 2 }}
-            onClick={handleGenerate}
-          >
-            Generate
-          </Button>
-          {generatedResponse && (
-            <Paper
-              sx={{
-                marginTop: 3,
-                padding: 2,
-                width: "100%",
-                backgroundColor: theme.palette.background.default,
-                boxShadow: 4,
-              }}
-            >
-              <Typography variant="h6" color="black" fontWeight="bold">
-                Generated Response:
-              </Typography>
-              <Typography variant="body1" color="black">
-                {generatedResponse}
-              </Typography>
-            </Paper>
-          )}
+
+          <Typography variant="h6" fontWeight="500" gutterBottom>
+            {poll.description}
+          </Typography>
+
           {/* Information Section */}
           <Box mt={3} width="100%">
-            {/* Summary */}
+            {/* Summary Section with Skeleton */}
             <Typography
               variant="subtitle1"
               fontWeight="bold"
@@ -161,17 +149,20 @@ export default function Poll() {
             >
               Summary:
             </Typography>
-
             <Typography
               textAlign="left"
               variant="body1"
               paragraph
               sx={{ lineHeight: 1.7, color: "black" }}
             >
-              INSERT SUMMARY HERE
+              {loading ? (
+                <Skeleton variant="rounded" width="100%" height={40} />
+              ) : (
+                summary || "No summary generated yet."
+              )}
             </Typography>
 
-            {/* Key Points Section */}
+            {/* Key Points Section with Skeletons */}
             <Typography
               variant="subtitle1"
               fontWeight="bold"
@@ -182,18 +173,32 @@ export default function Poll() {
               Key Points:
             </Typography>
             <Paper sx={{ boxShadow: 7, p: 1.5, borderRadius: "8px" }}>
-              <Typography variant="body1" color="black" fontWeight="500" mb={1}>
-                Key point 1
-              </Typography>
-              <Typography variant="body1" color="black" fontWeight="500" mb={1}>
-                Key point 2
-              </Typography>
-              <Typography variant="body1" color="black" fontWeight="500" mb={1}>
-                Key point 3
-              </Typography>
+              {loading
+                ? [1, 2, 3].map((index) => (
+                    <Skeleton
+                      key={index}
+                      variant="rounded"
+                      width="100%"
+                      height={20}
+                      sx={{ mb: 1 }}
+                    />
+                  ))
+                : keyPoints.length > 0
+                ? keyPoints.map((point, index) => (
+                    <Typography
+                      key={index}
+                      variant="body1"
+                      color="black"
+                      fontWeight="500"
+                      mb={1}
+                    >
+                      {point}
+                    </Typography>
+                  ))
+                : "No key points generated yet."}
             </Paper>
 
-            {/* Key Numbers Section */}
+            {/* Key Numbers Section with Skeleton */}
             <Typography
               variant="subtitle1"
               fontWeight="bold"
@@ -203,9 +208,25 @@ export default function Poll() {
             >
               Key Numbers:
             </Typography>
-            <DataItem label="Key number 1" value="€1.5 billion" />
-            <DataItem label="Key number 2" value="12%" />
-            <DataItem label="Key number 3" value="+5% in the last two years" />
+            <Paper sx={{ boxShadow: 7, p: 1.5, borderRadius: "8px" }}>
+              {loading
+                ? [1, 2, 3].map((index) => (
+                    <Skeleton
+                      key={index}
+                      variant="rounded"
+                      width="100%"
+                      height={20}
+                      sx={{ mb: 1 }}
+                    />
+                  ))
+                : keyFigures.map((figure, index) => (
+                    <DataItem
+                      key={index}
+                      label={figure.label}
+                      value={figure.value}
+                    />
+                  ))}
+            </Paper>
           </Box>
 
           {/* Voting buttons */}
