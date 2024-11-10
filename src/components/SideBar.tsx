@@ -39,7 +39,7 @@ function Sidebar() {
         }}
       >
         <Link href="#summary" underline="none" sx={linkStyle}>
-          <ArticleIcon fontSize="medium" />
+          <ArticleIcon fontSize="medium" sx={{ color: "black" }} />
           <Typography variant="subtitle1" sx={textStyle}>
             Voting
           </Typography>

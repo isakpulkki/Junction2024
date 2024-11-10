@@ -15,6 +15,7 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { theme } from "../App";
 import { useLocation, useNavigate } from "react-router-dom";
+import Sidebar from "../components/SideBar";
 
 type VoteType = "positive" | "negative";
 
@@ -117,6 +118,7 @@ export default function Poll() {
     <ThemeProvider theme={theme}>
       <div style={{ marginBottom: "10px" }}>
         <AuthenticationBar />
+        <Sidebar />
       </div>
       <Container>
         <Box
@@ -162,7 +164,11 @@ export default function Poll() {
           </Box>
 
           <Typography variant="h6" fontWeight="500" gutterBottom>
-            {poll.description}
+            The government is proposing changes to several tax laws. These
+            changes would update the Public Broadcasting Tax, adjust the Value
+            Added Tax rules, and modify specific tax rules for the Åland
+            Islands. The goal is to improve how these taxes are applied and make
+            sure they are up-to-date.
           </Typography>
 
           {/* Information Section */}
@@ -294,6 +300,11 @@ export default function Poll() {
             ))}
           </Stack>
         </Box>
+        <Box
+          sx={{
+            py: 3, // Adds vertical padding (top and bottom)
+          }}
+        ></Box>
       </Container>
     </ThemeProvider>
   );

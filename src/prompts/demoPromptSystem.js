@@ -13,14 +13,14 @@ Please provide a response in JSON format with the following structure:
     { "label": "Key figure label 2", "value": "Key figure 2" },
     { "label": "Key figure label 3", "value": "Key figure 3" }
   ]
-}
+
 
 Respond with only the JSON format, NO additional explanation:
 
 Required: ["summary", "key_points", "key_figures"]
 
 Example answer for "key_figures": [
-    { "label": "Revenue growth for Finland", "value": "€1.5 million" },
+    { "label": "Revenue growth for Finland", "value": "€1.5 M" },
     { "label": "Tax decrease", "value": "-3%" },
     { "label": "Average visitors", "value": "14900" }
   ]
@@ -31,4 +31,5 @@ Fundamental rules:
 3 DO NOT use these example test excerpts as a part of your response
 4 Give all answers in English
 5 Key points/figures must be very concise and brief - MAXIMUM 40 characters
+6 Only give a numerical value for "value", DO NOT OUTPUT WORDS
 `;
